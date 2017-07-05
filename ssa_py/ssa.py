@@ -15,7 +15,7 @@ class MSSA(object):
     '''Multi-channel Singular Spectrum Analysis object'''
 
     def __init__(self, time_series):
-        self.ts = pd.DataFrame(time_series)
+        self.ts = pd.DataFrame(time_series).reset_index(drop=True)
         self.ts_name = self.ts.columns.tolist()
         self.ts_v = self.ts.values
         self.ts_N = self.ts.shape[0]
