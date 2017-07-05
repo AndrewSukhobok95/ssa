@@ -295,21 +295,6 @@ class SSA(object):
 
 
 
-ts = pd.read_csv('data/art_series.csv', parse_dates=True, index_col=0)
-ts = pd.read_csv('data/air_ssa.csv', parse_dates=True, index_col=0)
-
-
-train = ts.iloc[:-40, :].copy()
-test = ts.iloc[-40:, :].copy()
-
-from datetime import timedelta
-day = [pd.to_datetime('2017-01-01')+timedelta(days=i) for i in range(200)]
-
-ssa = SSA(list(ts.iloc[:,0]))
-ssa.decompose(20)
-ssa.RLforecast(7, 40)
-ssa.plot(plot_series=[0], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='data/', file_name='plot')
-
 
 # #########################
 #
