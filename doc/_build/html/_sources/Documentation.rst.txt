@@ -1,0 +1,5 @@
+Documentation
+=============
+
+.. automodule:: ssa
+ :members:
