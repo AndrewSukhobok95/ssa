@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from numpy import matrix as m
 from scipy import linalg
+from scipy.stats import norm
 
 import plotly.plotly as py
 from plotly.graph_objs import *
@@ -340,44 +341,43 @@ class SSA(object):
         offline.plot(fig, filename=output_folder + file_name + '.html')
 
 
-#ts = pd.read_csv('data/art_series.csv', parse_dates=True, index_col=0)
-ts = pd.read_csv('data/air_ssa.csv', parse_dates=True, index_col=0)
 
-ssa = SSA(ts)
-ssa.decompose(20)
-ssa.RLforecast(7, 300)
-ssa.plot(plot_series=[0], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='data/', file_name='plot')
+if __name__=="__main__":
+
+    ts = pd.read_csv('../../data/air_ssa.csv', parse_dates=True, index_col=0)
+    ssa = SSA(ts)
+    ssa.decompose(20)
+    ssa.RLforecast(7, steps=50)
+    ssa.plot(plot_series=[0], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='../../data/', file_name='plot1')
+
+    ts = pd.read_csv('../../data/art_series.csv', parse_dates=True, index_col=0)
+    ssa = SSA(ts)
+    ssa.decompose(20)
+    ssa.RLforecast(7, steps=50)
+    ssa.plot(plot_series=[0, 1, 2], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='../../data/', file_name='plot2')
 
 
-
-
-
-
-ts = pd.read_csv('data/art_series.csv', parse_dates=True, index_col=0)
-#ts = pd.read_csv('data/air_ssa.csv', parse_dates=True, index_col=0)
-ssa = MSSA(ts)
-
-### Decomposition
-#
-# ssa.embed(embedding_dimension=2)
-# ssa.decompose()
-# b = ssa.diag_procedure()
-#
-### Forecasting Reccurent L
-#
-ssa.embed(embedding_dimension=20)
-ssa.decompose()
-ssa.group_components(5)
-forc = ssa.L_reccurent_forecast(40)
-inter = ssa.conf_int()
-#
-# ###Forecasting Reccurent K
-#
-# ssa.embed(embedding_dimension=10)
-# ssa.decompose()
-# ssa.group_components(1)
-# forc = ssa.K_reccurent_forecast(40)
-#
-#
-# forc.plot()
-# plt.show(block=False)
+    # ts = pd.read_csv('data/air_ssa.csv', parse_dates=True, index_col=0)
+    # ts = pd.read_csv('data/art_series.csv', parse_dates=True, index_col=0)
+    # ssa = MSSA(ts)
+    ### Decomposition
+    # ssa.embed(embedding_dimension=2)
+    # ssa.decompose()
+    # b = ssa.diag_procedure()
+    #
+    ### Forecasting Reccurent L
+    # ssa.embed(embedding_dimension=20)
+    # ssa.decompose()
+    # ssa.group_components(5)
+    # forc = ssa.L_reccurent_forecast(40)
+    # inter = ssa.conf_int()
+    # forc.plot()
+    # plt.show(block=False)
+    #
+    # ###Forecasting Reccurent K
+    # ssa.embed(embedding_dimension=10)
+    # ssa.decompose()
+    # ssa.group_components(1)
+    # forc = ssa.K_reccurent_forecast(40)
+    # forc.plot()
+    # plt.show(block=False)
