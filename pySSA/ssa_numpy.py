@@ -4,10 +4,8 @@ from numpy import matrix as m
 from scipy import linalg
 from scipy.stats import norm
 
-import plotly.plotly as py
 from plotly.graph_objs import *
 import plotly.offline as offline
-import matplotlib.pyplot as plt
 
 class MSSA(object):
     '''Multi-channel Singular Spectrum Analysis object
@@ -218,7 +216,7 @@ class MSSA(object):
             intervals.append(upper_bound_in + upper_bound_out)
         return pd.DataFrame(intervals).T
 
-########################################################################
+
 
 class SSA(object):
     '''external cover for MSSA method with graphs from plotly'''
@@ -344,28 +342,27 @@ class SSA(object):
 
 if __name__=="__main__":
 
-    ts = pd.read_csv('../../data/air_ssa.csv', parse_dates=True, index_col=0)
+    ts = pd.read_csv('../data/air_ssa.csv', parse_dates=True, index_col=0)
     ssa = SSA(ts)
     ssa.decompose(20)
     ssa.RLforecast(7, steps=50)
-    ssa.plot(plot_series=[0], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='../../data/', file_name='plot1')
+    ssa.plot(plot_series=[0], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='../data/', file_name='plot1')
 
-    ts = pd.read_csv('../../data/art_series.csv', parse_dates=True, index_col=0)
+    ts = pd.read_csv('../data/art_series.csv', parse_dates=True, index_col=0)
     ssa = SSA(ts)
     ssa.decompose(20)
     ssa.RLforecast(7, steps=50)
-    ssa.plot(plot_series=[0, 1, 2], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='../../data/', file_name='plot2')
-
+    ssa.plot(plot_series=[0, 1, 2], title='Plot Name', x_ax='Day', y_ax='Value', output_folder='../data/', file_name='plot2')
 
     # ts = pd.read_csv('data/air_ssa.csv', parse_dates=True, index_col=0)
     # ts = pd.read_csv('data/art_series.csv', parse_dates=True, index_col=0)
     # ssa = MSSA(ts)
-    ### Decomposition
+    # ## Decomposition
     # ssa.embed(embedding_dimension=2)
     # ssa.decompose()
     # b = ssa.diag_procedure()
     #
-    ### Forecasting Reccurent L
+    # ## Forecasting Reccurent L
     # ssa.embed(embedding_dimension=20)
     # ssa.decompose()
     # ssa.group_components(5)
