@@ -1,6 +1,6 @@
 ## Python realization of Multivariate SSA algorithm
 
-(2018)
+(2017)
 
 Numpy realization of Multivariate Singular Spectrum Analysis algorithm.
 
