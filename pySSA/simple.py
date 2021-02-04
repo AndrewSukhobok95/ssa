@@ -29,7 +29,7 @@ class SSA(object):
         self.forecast = self.mssa.L_reccurent_forecast(steps)
         self.conf_intervals = self.mssa.conf_int()
         if conf_int:
-            return pd.concat([self.forecast, self.conf_intervals])
+            return pd.concat([self.forecast, self.conf_intervals], axis=1)
         else:
             return self.forecast
 
